@@ -221,11 +221,11 @@ int Menu_Main(void)
 	}
 
 	// detect region
-	if (dirExists(BROWSER_PATH_EUR))
+	if (dirExists(WIIUCHAT_PATH_EUR))
 		region = EUR;
-	else if (dirExists(BROWSER_PATH_USA))
+	else if (dirExists(WIIUCHAT_PATH_USA))
 		region = USA;
-	else if (dirExists(BROWSER_PATH_JPN))
+	else if (dirExists(WIIUCHAT_PATH_JPN))
 		region = JPN;
 
 	if (region == Undetected)
@@ -242,15 +242,14 @@ int Menu_Main(void)
 	OSScreenClearBufferEx(1, 0);
 
 	console_print_pos(0, 0, "-----------------------------------------");
-	console_print_pos(0, 1, "Indexiine Installer v2 by GaryOderNichts");
-	console_print_pos(0, 2, "Indexiine by Jonhyjp");
-	console_print_pos(0, 3, "Detected Region: %s", regionStrings[region]);
-	console_print_pos(0, 4, "-----------------------------------------");
+	console_print_pos(0, 1, "PotatoHax Installer by Xpl0itU");
+	console_print_pos(0, 2, "Detected Region: %s", regionStrings[region]);
+	console_print_pos(0, 3, "-----------------------------------------");
 
-	console_print_pos(0, 6, "Press A to backup and replace index.html");
-	console_print_pos(0, 7, "Press B to restore index.html");
+	console_print_pos(0, 5, "Press A to backup and replace Wii U Chat");
+	console_print_pos(0, 6, "Press B to restore Wii U Chat");
 
-	console_print_pos(0, 9, "Press HOME to exit");
+	console_print_pos(0, 8, "Press HOME to exit");
 
 	// Flip buffers
 	OSScreenFlipBuffersEx(0);
@@ -259,17 +258,22 @@ int Menu_Main(void)
 	int vpadError = -1;
 	VPADData vpad;
 
-	char* indexpath;
+	char* rpxpath;
+	char* cospath;
+
 	switch (region)
 	{
 	case EUR:
-		indexpath = BROWSER_PATH_EUR INDEX_PATH;
+		rpxpath = WIIUCHAT_PATH_EUR RPX_PATH;
+		cospath = WIIUCHAT_PATH_EUR COS_PATH;
 		break;
 	case USA:
-		indexpath = BROWSER_PATH_USA INDEX_PATH;
+		rpxpath = WIIUCHAT_PATH_USA RPX_PATH;
+		cospath = WIIUCHAT_PATH_USA COS_PATH;
 		break;
 	case JPN:
-		indexpath = BROWSER_PATH_JPN INDEX_PATH;
+		rpxpath = WIIUCHAT_PATH_JPN RPX_PATH;
+		cospath = WIIUCHAT_PATH_JPN COS_PATH;
 		break;
 	default:
 		return 0;
@@ -284,24 +288,42 @@ int Menu_Main(void)
 		if(vpadError == 0 && ((vpad.btns_d | vpad.btns_h) & VPAD_BUTTON_A))
 		{
 			// Backup the file if it exists and there is no backup
-			if (fileExists(indexpath) && !fileExists(INDEX_BACKUP_PATH))
+			if (fileExists(rpxpath) && !fileExists(RPX_BACKUP_PATH))
 			{
-				copyFile(indexpath, INDEX_BACKUP_PATH);
+				copyFile(rpxpath, RPX_BACKUP_PATH);
 			}
 			
-			if (copyFile(INDEXIINE_INDEX_PATH, indexpath))
+			if (copyFile(POTATOHAX_RPX_PATH, rpxpath))
 			{
 				// chmod the file
-				chmodSingle(fsaFd, indexpath, INDEX_MODE);	
+				chmodSingle(fsaFd, rpxpath, INDEX_MODE);	
 			} 
 			else
 			{
-				console_printf(1, "Error copying index.html to %s", indexpath);
+				console_printf(1, "Error copying doors.rpx to %s", rpxpath);
+				sleep(4);
+				break;
+			}
+
+			// cos.xml
+			if (fileExists(cospath) && !fileExists(COS_BACKUP_PATH))
+			{
+				copyFile(cospath, COS_BACKUP_PATH);
+			}
+			
+			if (copyFile(POTATOHAX_COS_PATH, cospath))
+			{
+				// chmod the file
+				chmodSingle(fsaFd, cospath, INDEX_MODE);	
+			} 
+			else
+			{
+				console_printf(1, "Error copying cos.xml to %s", cospath);
 				sleep(4);
 				break;
 			}
 			
-			console_printf(1, "Successfully installed Indexiine!");
+			console_printf(1, "Successfully installed PotatoHax!");
 			sleep(4);
 			break;
 		}
@@ -309,12 +331,19 @@ int Menu_Main(void)
 		// Restore
 		if(vpadError == 0 && ((vpad.btns_d | vpad.btns_h) & VPAD_BUTTON_B))
 		{
-			if (copyFile(INDEX_BACKUP_PATH, indexpath))
+			if (copyFile(RPX_BACKUP_PATH, rpxpath))
 			{
 				// chmod the file
-				chmodSingle(fsaFd, indexpath, INDEX_MODE);
+				chmodSingle(fsaFd, rpxpath, INDEX_MODE);
 
-				console_printf(1, "Successfully restored index.html");
+				console_printf(1, "Successfully restored doors.rpx");
+			}
+
+			if (copyFile(COS_BACKUP_PATH, cospath))
+			{
+				// chmod the file
+				chmodSingle(fsaFd, cospath, INDEX_MODE);
+				console_printf(1, "Successfully restored cos.xml");
 			}
 
 			sleep(4);

@@ -28,7 +28,7 @@ export OBJCOPY	:=	$(PREFIX)objcopy
 # SOURCES is a list of directories containing source code
 # INCLUDES is a list of directories containing extra header files
 #---------------------------------------------------------------------------------
-TARGET		:=	indexiine-installer
+TARGET		:=	potatohax-installer
 BUILD		:=	build
 BUILD_DBG	:=	$(TARGET)_dbg
 SOURCES		:=	src \
@@ -38,7 +38,7 @@ SOURCES		:=	src \
 				src/utils
 DATA		:=	
 
-INCLUDES	:=  src
+INCLUDES	:=  src include
 
 #---------------------------------------------------------------------------------
 # options for code generation
@@ -56,7 +56,7 @@ MAKEFLAGS += --no-print-directory
 #---------------------------------------------------------------------------------
 # any extra libraries we wish to link with the project
 #---------------------------------------------------------------------------------
-LIBS	:= -lgcc -lfat -liosuhax
+LIBS	:= -lgcc -lfat -L/opt/devkitpro/wut/usr/lib -liosuhax
 
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing
@@ -64,7 +64,7 @@ LIBS	:= -lgcc -lfat -liosuhax
 #---------------------------------------------------------------------------------
 LIBDIRS	:=	$(CURDIR)	\
 			$(DEVKITPPC)/lib  \
-			$(DEVKITPPC)/lib/gcc/powerpc-eabi/4.8.2
+			$(DEVKITPPC)/lib/gcc/powerpc-eabi/4.8.2  \
 
 
 #---------------------------------------------------------------------------------

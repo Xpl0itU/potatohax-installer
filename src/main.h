@@ -7,14 +7,18 @@
 
 #define MLC_MOUNT_PATH "/vol/storage_mlc01"
 
-#define BROWSER_PATH_EUR "dev:/sys/title/00050030/1001220a"
-#define BROWSER_PATH_USA "dev:/sys/title/00050030/1001210a"
-#define BROWSER_PATH_JPN "dev:/sys/title/00050030/1001200a"
+#define WIIUCHAT_PATH_EUR "dev:/sys/title/00050010/1005a200"
+#define WIIUCHAT_PATH_USA "dev:/sys/title/00050010/1005a100"
+#define WIIUCHAT_PATH_JPN "dev:/sys/title/00050010/1005a000"
 
-#define INDEX_PATH "/content/pages/index.html"
+#define RPX_PATH "/code/doors.rpx"
+#define COS_PATH "/code/cos.rpx"
 
-#define INDEX_BACKUP_PATH "sd:/wiiu/apps/indexiine-installer/backup-index.html"
-#define INDEXIINE_INDEX_PATH "sd:/wiiu/apps/indexiine-installer/index.html"
+#define RPX_BACKUP_PATH "sd:/wiiu/apps/potatohax-installer/data/doors-backup.rpx"
+#define POTATOHAX_RPX_PATH "sd:/wiiu/apps/potatohax-installer/data/doors.rpx"
+
+#define COS_BACKUP_PATH "sd:/wiiu/apps/potatohax-installer/data/cos-backup.xml"
+#define POTATOHAX_COS_PATH "sd:/wiiu/apps/potatohax-installer/data/cos.xml"
 
 #define INDEX_MODE 0x644
 

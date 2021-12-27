@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<app version="1">
+  <name>PotatoHax Installer</name>
+  <coder>Xpl0itU, GaryOderNichts</coder>
+  <version>1.0</version>
+  <release_date>20211227210000</release_date>
+  <short_description>Installer for PotatoHax</short_description> 
+  <long_description>
+	Press A to backup and replace Wii U Chat 
+	Press B to restore
+  </long_description> 
+  <url>https://github.com/Xpl0itU/potatohax-installer</url>
+  <category>tool</category>
+</app>
